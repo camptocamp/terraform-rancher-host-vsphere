@@ -40,11 +40,17 @@ variable "puppet_server" {}
 
 variable "puppet_caserver" {}
 
+variable "rancher_environment_id" {}
+
 variable "additional_user_data" {
   default = "#cloud-config\n"
 }
 
 variable "domain" {}
+
+variable "host_labels" {
+  default = {}
+}
 
 variable "tags" {
   default = {}
