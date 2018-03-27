@@ -186,18 +186,18 @@ resource "vsphere_virtual_machine" "rancher-node" {
 
 resource "puppetdb_node" "rancher-node" {
   count    = "${var.instance_count}"
-  certname = "${vsphere_virtual_machine.rancher-node.name}"
+  certname = "${element(vsphere_virtual_machine.rancher-node.*.name, count.index)}"
 }
 
 resource "puppetca_certificate" "rancher-node" {
   count = "${var.instance_count}"
-  name  = "${vsphere_virtual_machine.rancher-node.name}"
+  name  = "${element(vsphere_virtual_machine.rancher-node.*.name, count.index)}"
 }
 
 resource "rancher_host" "rancher-node" {
   count          = "${var.instance_count}"
   name           = ""
   environment_id = "${var.rancher_environment_id}"
-  hostname       = "${vsphere_virtual_machine.rancher-node.name}"
+  hostname       = "${element(vsphere_virtual_machine.rancher-node.*.name, count.index)}"
   labels         = "${merge(var.host_labels, map("io.rancher.host.os", "linux"))}"
 }
