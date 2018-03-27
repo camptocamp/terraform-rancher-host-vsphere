@@ -178,6 +178,10 @@ resource "vsphere_virtual_machine" "rancher-node" {
   clone {
     template_uuid = "${data.vsphere_virtual_machine.template.id}"
   }
+
+  lifecycle {
+    ignore_changes = ["cdrom"]
+  }
 }
 
 resource "puppetdb_node" "rancher-node" {
