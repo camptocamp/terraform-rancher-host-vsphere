@@ -1,7 +1,7 @@
 #cloud-config
 
 packages:
-  - docker-engine
+  - docker-ce
 
 write_files:
   - path: "/etc/docker/daemon.json"
