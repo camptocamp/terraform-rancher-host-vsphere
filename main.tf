@@ -78,7 +78,7 @@ data "template_cloudinit_config" "config" {
   count = "${var.instance_count}"
 
   gzip          = false
-  base64_encode = true
+  base64_encode = false
 
   part {
     filename     = "network.cfg"
